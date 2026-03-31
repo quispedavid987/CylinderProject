@@ -1,0 +1,5 @@
+/build
+*.o
+simu
+.root
+.vscode
