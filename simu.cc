@@ -30,7 +30,7 @@ int main(G4int argc, char** argv)
 
     // vamos poniendo los comandos inciales
     UIManager->ApplyCommand("/vis/open OGL"); // Abre la imagen del detector
-        UIManager->ApplyCommand("/vis/viewer/set/viewpointVector 0 3 2");
+        UIManager->ApplyCommand("/vis/viewer/set/viewpointVector 1 1.7 1.2");
     UIManager->ApplyCommand("/vis/ogl/set/displayListLimit 50000");
 
     UIManager->ApplyCommand("/vis/drawVolume");
@@ -40,7 +40,9 @@ int main(G4int argc, char** argv)
     UIManager->ApplyCommand("/vis/scene/endOfEventAction accumulate 300");
 
     UIManager->ApplyCommand("/vis/modeling/trajectories/create/drawByParticleID");
-    UIManager->ApplyCommand("/vis/modeling/trajectories/drawByParticleID-0/set e- red");
+    UIManager->ApplyCommand("/vis/modeling/trajectories/drawByParticleID-0/set e- blue");
+    UIManager->ApplyCommand("/vis/modeling/trajectories/drawByParticleID-0/set mu- red");
+    UIManager->ApplyCommand("/vis/modeling/trajectories/drawByParticleID-0/set opticalphoton green");
     //
 
     ui -> SessionStart();
