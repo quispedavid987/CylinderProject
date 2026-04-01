@@ -13,7 +13,7 @@ SetUserAction(generator);
 
 PrimaryGeneratorAction::PrimaryGeneratorAction()
 {
-    fParticleGun = new G4ParticleGun(20); // disparar 1 particulas
+    fParticleGun = new G4ParticleGun(1); // disparar 1 particulas
 
     G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable(); // llamando a la lista de particulas
     G4ParticleDefinition* particle = particleTable -> FindParticle("mu-"); // definiendo el proton

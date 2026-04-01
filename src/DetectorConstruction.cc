@@ -53,5 +53,13 @@ G4VPhysicalVolume* MyDetectorconstruction::Construct()
     fLogicEllipsoid -> SetVisAttributes(ellipAtt);
 
     ===============================*/
+
+    G4MaterialPropertiesTable* mpt = new G4MaterialPropertiesTable();
+    G4double energy[] = {2.0*eV, 3.0*eV, 3.0*eV};
+    G4double rindex[] = {1.33, 1.33, 1.33};
+
+    mpt -> AddProperty("RINDEX", energy, rindex, 3);
+    lead -> SetMaterialPropertiesTable(mpt);
+
     return physWorld; // retornamos el muno (donde esta todo lo construido)
 }

@@ -6,6 +6,7 @@
 #include "G4OpticalPhysics.hh"
 #include "G4RadioactiveDecayPhysics.hh"
 #include "G4DecayPhysics.hh"
+#include "globals.hh"
 
 class MyPhysicsList : public G4VModularPhysicsList
 {
