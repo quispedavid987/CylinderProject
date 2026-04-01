@@ -27,8 +27,8 @@ G4VPhysicalVolume* MyDetectorconstruction::Construct()
 
     // creamos un cilindro (dentro del universo)
     G4double intRadius  = 0. * cm;
-    G4double outRadius  = 10. * cm;
-    G4double halfHeight = 15. * cm;
+    G4double outRadius  = 15. * cm;
+    G4double halfHeight = 20. * cm;
     G4double phi0       = 0. * deg;
     G4double phif       = 360. * deg;
     G4Tubs* solidCylider = new G4Tubs("Cylinder", intRadius, outRadius, halfHeight, phi0, phif);
@@ -37,6 +37,8 @@ G4VPhysicalVolume* MyDetectorconstruction::Construct()
     G4VisAttributes* cylAtt = new G4VisAttributes(G4Colour::Blue()); // color
     cylAtt -> SetForceSolid(true);
     fLogicCylinder -> SetVisAttributes(cylAtt);
+
+    /*=============================
 
     G4double semiXaxes = 5. * cm;
     G4double semiYaxes = 8. * cm;
@@ -50,5 +52,6 @@ G4VPhysicalVolume* MyDetectorconstruction::Construct()
     //ellipAtt -> SetForceSolid(true);
     fLogicEllipsoid -> SetVisAttributes(ellipAtt);
 
+    ===============================*/
     return physWorld; // retornamos el muno (donde esta todo lo construido)
 }
