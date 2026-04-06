@@ -16,7 +16,7 @@ PrimaryGeneratorAction::PrimaryGeneratorAction()
     fParticleGun = new G4ParticleGun(1); // disparar 1 particulas
 
     G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable(); // llamando a la lista de particulas
-    G4ParticleDefinition* particle = particleTable -> FindParticle("mu-"); // definiendo el proton
+    G4ParticleDefinition* particle = particleTable -> FindParticle("proton"); // definiendo el proton
 
     fParticleGun -> SetParticleDefinition(particle);
     fParticleGun -> SetParticleMomentumDirection(G4ThreeVector(0., 0., -1.));
