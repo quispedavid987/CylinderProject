@@ -42,6 +42,8 @@ int main(G4int argc, char** argv)
     UIManager->ApplyCommand("/vis/modeling/trajectories/create/drawByParticleID");
     UIManager->ApplyCommand("/vis/modeling/trajectories/drawByParticleID-0/set e- blue");
     UIManager->ApplyCommand("/vis/modeling/trajectories/drawByParticleID-0/set mu- red");
+    UIManager->ApplyCommand("/vis/modeling/trajectories/drawByParticleID-0/set mu+ red");
+
     UIManager->ApplyCommand("/vis/modeling/trajectories/drawByParticleID-0/set opticalphoton green");
     //
 
