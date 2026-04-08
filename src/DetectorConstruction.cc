@@ -25,7 +25,7 @@ G4VPhysicalVolume* MyDetectorconstruction::Construct()
     G4LogicalVolume* logicWorld = new G4LogicalVolume(solidWorld, air, "World"); // Material de la geometria construida
     G4VPhysicalVolume* physWorld = new G4PVPlacement(0, G4ThreeVector(0.,0.,0.), logicWorld, "World", 0, false, 0); // Ubicacion en el espacio
 
-    // creamos un cilindro (dentro del universo)
+    // creamos un cilindro (Agua del tanque Cherenkov)
     G4double intRadius  = 0. * cm;
     G4double outRadius  = 15. * cm;
     G4double halfHeight = 20. * cm;
@@ -37,23 +37,7 @@ G4VPhysicalVolume* MyDetectorconstruction::Construct()
     G4VisAttributes* cylAtt = new G4VisAttributes(G4Colour::Blue()); // color
     cylAtt -> SetForceSolid(true);
     fLogicCylinder -> SetVisAttributes(cylAtt);
-
-    /*=============================
-
-    G4double semiXaxes = 5. * cm;
-    G4double semiYaxes = 8. * cm;
-    G4double semiZaxes = 3. * cm;
-    G4double pzBottomCut = 0;
-    G4double pzTopCut = 0;
-    G4Ellipsoid* solidEllipsoid = new G4Ellipsoid("Ellipsoid", semiXaxes, semiYaxes, semiZaxes, pzBottomCut, pzTopCut);
-    fLogicEllipsoid = new G4LogicalVolume(solidEllipsoid, lead, "Ellipsoid");
-    new G4PVPlacement(0, G4ThreeVector(20., 20., 20.)*cm, fLogicEllipsoid, "Ellipsoid", logicWorld, false, 0);
-    G4VisAttributes* ellipAtt = new G4VisAttributes(G4Colour::Red());
-    //ellipAtt -> SetForceSolid(true);
-    fLogicEllipsoid -> SetVisAttributes(ellipAtt);
-
-    ===============================*/
-
+    
     // Propiedades opticas del agua del agua (necesaria para la propagacion de fotones en el agua)
     G4MaterialPropertiesTable* WaterProperties = new G4MaterialPropertiesTable();
     G4double WaterPhotonEnergy[] = {
@@ -63,19 +47,19 @@ G4VPhysicalVolume* MyDetectorconstruction::Construct()
 		2.885 * eV, 2.954 * eV, 3.026 * eV, 3.102 * eV, 3.181 * eV, 3.265 * eV,
 		3.353 * eV, 3.446 * eV, 3.545 * eV, 3.649 * eV, 3.760 * eV, 3.877 * eV,
 		4.002 * eV, 4.136 * eV
-	};
+	  };
 
     G4double WaterRefIndex[] = {
 		1.3435, 1.344,  1.3445, 1.345,  1.3455, 1.346,  1.3465, 1.347,
 		1.3475, 1.348,  1.3485, 1.3492, 1.35,   1.3505, 1.351,  1.3518,
 		1.3522, 1.3530, 1.3535, 1.354,  1.3545, 1.355,  1.3555, 1.356,
 		1.3568, 1.3572, 1.358,  1.3585, 1.359,  1.3595, 1.36,   1.3608
-	};
+	  };
 
     G4int WaterPhotonEntries = sizeof(WaterPhotonEnergy) / sizeof(G4double);
     WaterProperties -> AddProperty("RINDEX", WaterPhotonEnergy, WaterRefIndex, WaterPhotonEntries);
 
-
+    
     G4double scaleAbsLen = 1.0*m;
     G4double WaterAbsLen[] = {
 		3.448*scaleAbsLen,  4.082*scaleAbsLen,  6.329*scaleAbsLen,  9.174*scaleAbsLen,  12.346*scaleAbsLen, 13.889*scaleAbsLen,
@@ -86,7 +70,7 @@ G4VPhysicalVolume* MyDetectorconstruction::Construct()
 		17.500*scaleAbsLen, 14.500*scaleAbsLen
     };
     WaterProperties -> AddProperty("ABSLENGTH", WaterPhotonEnergy, WaterAbsLen, WaterPhotonEntries);
-
+    
     G4double water2PhotonEnergyMie[] = {
 		1.56962 * eV, 1.58974 * eV, 1.61039 * eV, 1.63157 * eV, 1.65333 * eV,
 		1.67567 * eV, 1.69863 * eV, 1.72222 * eV, 1.74647 * eV, 1.77142 * eV,
@@ -100,7 +84,7 @@ G4VPhysicalVolume* MyDetectorconstruction::Construct()
 		3.64705 * eV, 3.75757 * eV, 3.87499 * eV, 3.99999 * eV, 4.13332 * eV,
 		4.27585 * eV, 4.42856 * eV, 4.59258 * eV, 4.76922 * eV, 4.95999 * eV,
 		5.16665 * eV, 5.39129 * eV, 5.63635 * eV, 5.90475 * eV, 6.19998 * eV	
-	};
+	  };
 
     G4double water2Mie[] = {
 		167024.4 * m, 158726.7 * m, 150742 * m,   143062.5 * m, 135680.2 * m,
@@ -115,24 +99,18 @@ G4VPhysicalVolume* MyDetectorconstruction::Construct()
 		5730.429 * m, 5085.425 * m, 4496.467 * m, 3960.210 * m, 3473.413 * m,
 		3032.937 * m, 2635.746 * m, 2278.907 * m, 1959.588 * m, 1675.064 * m,
 		1422.710 * m, 1200.004 * m, 1004.528 * m, 833.9666 * m, 686.1063 * m
-	};
-    WaterProperties -> AddProperty("MIEHG", water2PhotonEnergyMie, water2Mie, WaterPhotonEntries);
+	  };
+    G4int Water2PhotonMieEntries = sizeof(water2PhotonEnergyMie) / sizeof(G4double);
+    WaterProperties -> AddProperty("MIEHG", water2PhotonEnergyMie, water2Mie, Water2PhotonMieEntries);
 
-    G4double water2MieConst[3] = { 0.99, 0.99, 0.8 };
-    WaterProperties -> AddConstProperty("MIEHG_FORWARD", water2MieConst[0]);
-    WaterProperties -> AddConstProperty("MIEHG_BACKWARD", water2MieConst[1]);
-    WaterProperties -> AddConstProperty("MIEHG_FORWARD_RATIO", water2MieConst[2]);
-
+    //G4double water2MieConst[3] = { 0.99, 0.99, 0.8 };
+    WaterProperties -> AddConstProperty("MIEHG_FORWARD", 0.99);
+    WaterProperties -> AddConstProperty("MIEHG_BACKWARD", 0.99);
+    WaterProperties -> AddConstProperty("MIEHG_FORWARD_RATIO", 0.8);
+    
     water -> SetMaterialPropertiesTable(WaterProperties);
 
     
-    // Propiedades opticas para el aire (para la progracion de fotones en el aire)
-    G4MaterialPropertiesTable* AirProperties = new G4MaterialPropertiesTable();
-    G4double AirPhotonEnergy[] = {2.03 * eV, 3.0 * eV, 4.13 * eV};
-    G4double AirRefIndex[]     = {1.0, 1.0, 1.0};
-
-    G4int AirPhotonEntries = sizeof(AirPhotonEnergy) / sizeof(G4double);
-    AirProperties -> AddProperty("RINDEX", AirPhotonEnergy, AirRefIndex, AirPhotonEntries);
     
 
 

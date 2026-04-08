@@ -34,7 +34,7 @@ int main(G4int argc, char** argv)
     UIManager->ApplyCommand("/vis/ogl/set/displayListLimit 50000");
 
     UIManager->ApplyCommand("/vis/drawVolume");
-    UIManager->ApplyCommand("/vis/scene/add/axes 0 0 0 50 cm");
+    UIManager->ApplyCommand("/vis/scene/add/axes 40 -40 -40 10 cm");
     UIManager->ApplyCommand("/vis/viewer/set/autorefresh true");
     UIManager->ApplyCommand("/vis/scene/add/trajectories smooth");
     UIManager->ApplyCommand("/vis/scene/endOfEventAction accumulate 300");
@@ -45,12 +45,15 @@ int main(G4int argc, char** argv)
     UIManager->ApplyCommand("/vis/modeling/trajectories/drawByParticleID-0/set mu+ red");
 
     UIManager->ApplyCommand("/vis/modeling/trajectories/drawByParticleID-0/set opticalphoton green");
+    UIManager->ApplyCommand("/run/beamOn 1");
     //
 
     ui -> SessionStart();
 
+    
     delete visManager;
     delete runManager;
     G4cout << "========== Simulacion completa ===========" << G4endl;
+
     return 0;
 }

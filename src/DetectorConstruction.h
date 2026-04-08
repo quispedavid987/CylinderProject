@@ -22,7 +22,7 @@ public:
 
 private:
     G4LogicalVolume*  fLogicCylinder;
-    G4LogicalVolume*  fLogicEllipsoid;
+    //G4LogicalVolume*  fLogicEllipsoid;
 };
 
 
