@@ -2,8 +2,8 @@
 #include "G4ParticleTable.hh"
 #include "G4SystemOfUnits.hh"
 
-MyActionInitialization::MyActionInitialization() {};
-MyActionInitialization::~MyActionInitialization() {};
+MyActionInitialization::MyActionInitialization() {}
+MyActionInitialization::~MyActionInitialization() {}
 
 void MyActionInitialization::Build() const{
 PrimaryGeneratorAction *generator = new PrimaryGeneratorAction();
