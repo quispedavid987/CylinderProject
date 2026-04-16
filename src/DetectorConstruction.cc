@@ -18,21 +18,23 @@ G4VPhysicalVolume* MyDetectorconstruction::Construct()
     G4NistManager* nist = G4NistManager::Instance();
     G4Material* air = nist -> FindOrBuildMaterial("G4_AIR");
     G4Material* water = nist -> FindOrBuildMaterial("G4_WATER");
+    
+    // Creando nuevos materiales
+    
 
     // creamos el mundo (universo)
     G4double world_size = 1 * m; //tamaño de cada arista
     G4Box* solidWorld = new G4Box("World",0.5*world_size, 0.5*world_size, 0.5*world_size); // Geometria
     G4LogicalVolume* logicWorld = new G4LogicalVolume(solidWorld, air, "World"); // Material de la geometria construida
     G4VPhysicalVolume* physWorld = new G4PVPlacement(0, G4ThreeVector(0.,0.,0.), logicWorld, "World", 0, false, 0); // Ubicacion en el espacio
-
     // creamos un cilindro (Agua del tanque Cherenkov)
     G4double intRadius  = 0. * cm;
     G4double outRadius  = 15. * cm;
     G4double halfHeight = 20. * cm;
     G4double phi0       = 0. * deg;
     G4double phif       = 360. * deg;
-    G4Tubs* solidCylider = new G4Tubs("Cylinder", intRadius, outRadius, halfHeight, phi0, phif);
-    fLogicCylinder = new G4LogicalVolume(solidCylider, water, "Cylinder");
+    G4Tubs* solidCylinder = new G4Tubs("Cylinder", intRadius, outRadius, halfHeight, phi0, phif);
+    fLogicCylinder = new G4LogicalVolume(solidCylinder, water, "Cylinder");
     new G4PVPlacement(0, G4ThreeVector(0.,0.,0.), fLogicCylinder, "Cylinder", logicWorld, false, 0);
     G4VisAttributes* cylAtt = new G4VisAttributes(G4Colour::Blue()); // color
     cylAtt -> SetForceSolid(true);

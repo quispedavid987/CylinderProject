@@ -21,8 +21,9 @@ public:
     virtual G4VPhysicalVolume* Construct();
 
 private:
-    G4LogicalVolume*  fLogicCylinder;
+    G4LogicalVolume* fLogicCylinder;
     //G4LogicalVolume*  fLogicEllipsoid;
+    G4LogicalVolume* fLogicalFiber; 
 };
 
 
